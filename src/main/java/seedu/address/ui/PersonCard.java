@@ -13,7 +13,7 @@ import seedu.address.model.person.Person;
  * An UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
-
+    
     private static final String FXML = "PersonListCard.fxml";
 
     /**
@@ -39,6 +39,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label remark;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -48,10 +50,12 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
+        remark.setText(person.getRemark().value);
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        remark.setText(person.getRemark().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
