@@ -8,5 +8,6 @@ class RemarkCommandTest {
 
     @Test
     void execute() {
+        // do something
     }
 }
