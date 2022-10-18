@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,7 +12,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
+import seedu.address.model.task.Task;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -21,7 +23,10 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Project> filteredProjects;
+    private final ArrayList<Project> targetProject = new ArrayList<>();
+    private final FilteredList<Task> filteredTasks;
+    private final ArrayList<Task> targetTask = new ArrayList<>();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -33,7 +38,8 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredProjects = new FilteredList<>(this.addressBook.getProjectList());
+        filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
     }
 
     public ModelManager() {
@@ -88,44 +94,118 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasProject(Project project) {
+        requireNonNull(project);
+        return addressBook.hasProject(project);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public void deleteProject(Project target) {
+        addressBook.removeProject(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void sortProjects() {
+        addressBook.sortProjects();
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+    public void addProject(Project project) {
+        addressBook.addProject(project);
+        updateFilteredProjectList(PREDICATE_SHOW_ALL_PROJECTS);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public void setProject(Project target, Project editedProject) {
+        requireAllNonNull(target, editedProject);
+
+        addressBook.setProject(target, editedProject);
+    }
+
+    @Override
+    public void setTargetProject(Project target) {
+        requireNonNull(target);
+        if (this.targetProject.isEmpty()) {
+            this.targetProject.add(target);
+        } else {
+            this.targetProject.set(0, target);
+        }
+    }
+
+    @Override
+    public ArrayList<Project> getTargetProject() {
+        return targetProject;
+    }
+
+    @Override
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return addressBook.hasTask(task);
+    }
+
+    @Override
+    public void deleteTask(Task target) {
+        addressBook.removeTask(target);
+    }
+
+    @Override
+    public void addTask(Task task) {
+        addressBook.addTask(task);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    }
+
+    @Override
+    public void setTask(Task target, Task editedTask) {
+        requireAllNonNull(target, editedTask);
+
+        addressBook.setTask(target, editedTask);
+    }
+
+    @Override
+    public void setTargetTask(Task target) {
+        requireNonNull(target);
+        if (this.targetTask.isEmpty()) {
+            this.targetTask.add(target);
+        } else {
+            this.targetTask.set(0, target);
+        }
+    }
+
+    @Override
+    public ArrayList<Task> getTargetTask() {
+        return targetTask;
+    }
+
+    //=========== Filtered Project List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Project} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Project> getFilteredProjectList() {
+        return filteredProjects;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredProjectList(Predicate<Project> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredProjects.setPredicate(predicate);
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Task} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        return filteredTasks;
+    }
+
+    @Override
+    public void updateFilteredTaskList(Predicate<Task> predicate) {
+        requireNonNull(predicate);
+        filteredTasks.setPredicate(predicate);
     }
 
     @Override
@@ -144,7 +224,10 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredProjects.equals(other.filteredProjects)
+                && filteredTasks.equals(other.filteredTasks)
+                && targetProject.equals(other.targetProject)
+                && targetTask.equals(other.targetTask);
     }
 
 }
