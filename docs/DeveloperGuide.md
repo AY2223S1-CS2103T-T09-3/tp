@@ -201,7 +201,7 @@ The `AddStaffCommandParser`, which is a class that extends the `Parser` interfac
 two objects, a `ProjectName` object, and a `Staff` object.
 
 Step 2. The `AddStaffCommand` checks if the project exists by checking if the `ProjectName` already exists in
-`Model.getFilteredProjectList()`. 
+`Model.getFilteredProjectList()`.
 
 Step 3. The method also checks if the `Staff` already exists in the `Project`. If the `Staff` already exists, a `CommandException` is thrown.
 
@@ -213,7 +213,7 @@ Sequence diagram for the execution of `AddStaffCommand`
 #### Design Considerations
 **Aspect: Finding project to add**
 
-Finding project to add is not straightforward since only `ProjectName` is passed as argument to the `AddStaffCommand`. 
+Finding project to add is not straightforward since only `ProjectName` is passed as argument to the `AddStaffCommand`.
 
 - **Alternative 1 (current choice)**: Checks all projects using `ProjectName`.
     - Pros: Easy to code out.
@@ -222,7 +222,7 @@ Finding project to add is not straightforward since only `ProjectName` is passed
 - **Alternative 2**: Create a dummy project to check with
     - Pros: Intuitively makes sense, since we are adding the `Staff` to the `Project.
     - Cons: Hard to implement. The `Project` `equals()` method checks for equality on all the parameters of a project, so
-    simply creating a blank `Project` won't do.` 
+    simply creating a blank `Project` won't do.`
 
 
 ### \[Proposed\] Undo/redo feature
@@ -547,7 +547,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. User realises staff detail is wrong.
 4. User delete staff detail.
 5. User add staff with updated detail.
-6. HR Pro Max++ displays updated staff member added and stores them. 
+6. HR Pro Max++ displays updated staff member added and stores them.
 
     Steps 3-6 are repeated until staff member detail is correct.
 
@@ -555,7 +555,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The given project is invalid.
     * 1a1. HR Pro Max++ shows error.
-    
+      
       Use case resume at step 1.
 * 4a. The given project is invalid.
     * 4a1 HR Pro Max++ shows error.

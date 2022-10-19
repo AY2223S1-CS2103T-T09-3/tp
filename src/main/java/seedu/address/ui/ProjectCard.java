@@ -48,19 +48,10 @@ public class ProjectCard extends UiPart<Region> {
         super(FXML);
         this.project = project;
         id.setText(displayedIndex + ". ");
-<<<<<<< HEAD:src/main/java/seedu/address/ui/PersonCard.java
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        remark.setText(person.getRemark().value);
-        person.getTags().stream()
-=======
         projectName.setText(project.getProjectName().fullName);
         budget.setText("Budget: $" + project.getBudget().value);
         deadline.setText("Project deadline: " + project.getDeadline().deadline);
         project.getTags().stream()
->>>>>>> 8fd51e6905e8d5bbb71c5529a791305511b73a23:src/main/java/seedu/address/ui/ProjectCard.java
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }

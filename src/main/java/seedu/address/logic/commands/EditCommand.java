@@ -18,21 +18,12 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-<<<<<<< HEAD
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
-=======
 import seedu.address.model.project.Budget;
 import seedu.address.model.project.Deadline;
 import seedu.address.model.project.Project;
 import seedu.address.model.project.ProjectName;
 import seedu.address.model.staff.Staff;
 import seedu.address.model.staff.UniqueStaffList;
->>>>>>> 8fd51e6905e8d5bbb71c5529a791305511b73a23
 import seedu.address.model.tag.Tag;
 
 /**
@@ -101,16 +92,6 @@ public class EditCommand extends Command {
     private static Project createEditedProject(Project projectToEdit, EditProjectDescriptor editProjectDescriptor) {
         assert projectToEdit != null;
 
-<<<<<<< HEAD
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Remark updatedRemark = personToEdit.getRemark(); // edit command does not allow editing remarks
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark, updatedTags);
-=======
         ProjectName updatedProjectName = editProjectDescriptor.getProjectName().orElse(projectToEdit.getProjectName());
         Budget updatedBudget = editProjectDescriptor.getBudget().orElse(projectToEdit.getBudget());
         Deadline updatedDeadline = editProjectDescriptor.getDeadline().orElse(projectToEdit.getDeadline());
@@ -125,7 +106,7 @@ public class EditCommand extends Command {
         }
 
         return newProject;
->>>>>>> 8fd51e6905e8d5bbb71c5529a791305511b73a23
+
     }
 
     @Override
