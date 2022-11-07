@@ -687,9 +687,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | team lead | sort projects by deadline                      | know which projects are due soonest             |
 | `* *`    | team lead | find task by name                              | find out more information about the task        |
 | `* *`    | team lead | sort task by deadline                          | know which task is more urgent                  |
-| `* *`    | team lead | sort task by completetion status               | see all my remaining tasks that have to be done |
+| `* *`    | team lead | sort task by completion status                 | see all my remaining tasks that have to be done |
 
-<div style="page-break-after: always"></div>
 ## **Use cases**
 
 (For all use cases below, the **System** is the `HR Pro Max++` and the **Actor** is the `user`, unless specified otherwise)
